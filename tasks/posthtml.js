@@ -54,12 +54,9 @@ module.exports = function(grunt) {
       validation(file.src[0], grunt);
 
       var content = grunt.file.read(file.src[0]);
+      var result = posthtml(plugins).process(content, {sync: true});
 
-      posthtml(plugins)
-        .process(content, options)
-        .then(function(result) {
-          grunt.file.write(file.dest, result.html);
-        });
+      grunt.file.write(file.dest, result.html);
 
     });
 
